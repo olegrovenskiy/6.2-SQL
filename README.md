@@ -137,5 +137,72 @@
 
 
 
+		test_db=# update clients1
+		test_db-# set заказ = 3
+		test_db-# where id = 1;
+		UPDATE 1
+		test_db=# select * from orders;
+		 id |     наименование     | цена
+		----+----------------------+------
+		  1 | Шоколад              |   10
+ 		  2 | Принтер              | 3000
+		  3 | Книга                |  500
+ 		  4 | Монитор              | 7000
+ 		  5 | Гитара               | 4000
+		(5 rows)
+		
+		test_db=# select * from clients1
+		test_db-# ;
+		 id |       фамилия        |  страна_проживания   | заказ
+		----+----------------------+----------------------+-------
+ 		  2 | Петров Пётр Петрович | Canada               |
+		  3 | Иоган Себастьян Бах  | Japan                |
+		  4 | Ронни Джеймс Дио     | Russia               |
+		  5 | Rithie Blackmore     | Russia               |
+ 		  1 | Иванов Иван Иванович | USA                  |     3
+		(5 rows)
+
+		test_db=# update clients1
+		set заказ = 4
+		where id = 2;
+		UPDATE 1
+		test_db=# update clients1
+		set заказ = 5
+		where id = 3;
+		UPDATE 1
+		test_db=#
+		test_db=#
+		test_db=# select * from clients1
+		;
+		 id |       фамилия        |  страна_проживания   | заказ
+		----+----------------------+----------------------+-------
+		  4 | Ронни Джеймс Дио     | Russia               |
+		  5 | Rithie Blackmore     | Russia               |
+ 		  1 | Иванов Иван Иванович | USA                  |     3
+		  2 | Петров Пётр Петрович | Canada               |     4
+		  3 | Иоган Себастьян Бах  | Japan                |     5
+		(5 rows)
+		
+		
+			test_db=# select *
+		from clients1
+		where exists
+		(select *
+		from orders
+		where clients1.заказ = orders.id);
+		 id |       фамилия        |  страна_проживания   | заказ
+-		 ---+----------------------+----------------------+-------
+		  1 | Иванов Иван Иванович | USA                  |     3
+		  2 | Петров Пётр Петрович | Canada               |     4
+ 		  3 | Иоган Себастьян Бах  | Japan                |     5
+		(3 rows)
+		
+		test_db=#
+		
+		
+## Задача 5
+	
+
+
 
     
