@@ -84,5 +84,58 @@
 
 ## Задача 3
 
+вывод данных в таблицах
+
+    test_db=# select * from orders;
+     id |     наименование     | цена
+    ----+----------------------+------
+      1 | Шоколад              |   10
+      2 | Принтер              | 3000
+      3 | Книга                |  500
+      4 | Монитор              | 7000
+      5 | Гитара               | 4000
+    (5 rows)
+
+
+    create table clients
+    (
+	
+	    id SERIAL PRIMARY KEY,
+    	фамилия char(20),
+	    страна_проживания char(20),
+    	заказ integer,
+    	FOREIGN KEY (заказ) REFERENCES  orders (id)
+    );
+
+
+    test_db=# select * from clients
+    test_db-# ;
+     id |       фамилия        |  страна_проживания   | заказ
+    ----+----------------------+----------------------+-------
+      2 | Петров Пётр Петрович | Canada               |
+      3 | Иоган Себастьян Бах  | Japan                |
+      4 | Ронни Джеймс Дио     | Russia               |
+      5 | Rithie Blackmore     | Russia               |
+      1 | Иванов Иван Иванович | USA                  |     3
+        (5 rows)
+
+
+    test_db=# select count (*) from orders;
+     count
+    -------
+        5
+    (1 row)
+
+    test_db=# select count (*) from clients;
+    count
+    -------
+         5
+    (1 row)
+    
+    
+## Задача 4
+
+
+
 
     
